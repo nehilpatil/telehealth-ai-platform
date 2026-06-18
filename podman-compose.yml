@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: telehealth-ai-backend:latest
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=sqlite:///telehealth.db
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    image: telehealth-ai-frontend:latest
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
