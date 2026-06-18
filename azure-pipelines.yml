@@ -36,11 +36,41 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install Backend Dependencies'
 
-- script: |
-    docker build -t telehealth-backend:$(Build.BuildId) .
+- task: Docker@2
   displayName: 'Build Backend Image'
+  inputs:
+    command: build
+    repository: telehealth-backend
+    dockerfile: Dockerfile
+    containerRegistry: telehealth-acr-connection
+    tags: |
+      $(Build.BuildId)
 
-- script: |
-    docker build -t telehealth-frontend:$(Build.BuildId) ./frontend
+- task: Docker@2
+  displayName: 'Push Backend Image'
+  inputs:
+    command: push
+    repository: telehealth-backend
+    containerRegistry: telehealth-acr-connection
+    tags: |
+      $(Build.BuildId)
+
+- task: Docker@2
   displayName: 'Build Frontend Image'
+  inputs:
+    command: build
+    repository: telehealth-frontend
+    dockerfile: frontend/Dockerfile
+    buildContext: frontend
+    containerRegistry: telehealth-acr-connection
+    tags: |
+      $(Build.BuildId)
 
+- task: Docker@2
+  displayName: 'Push Frontend Image'
+  inputs:
+    command: push
+    repository: telehealth-frontend
+    containerRegistry: telehealth-acr-connection
+    tags: |
+      $(Build.BuildId)
