@@ -37,5 +37,10 @@ steps:
   displayName: 'Install Backend Dependencies'
 
 - script: |
-    python -c "from api.main import app; print('FastAPI import successful')"
-  displayName: 'Verify FastAPI Application'
+    docker build -t telehealth-backend:$(Build.BuildId) .
+  displayName: 'Build Backend Image'
+
+- script: |
+    docker build -t telehealth-frontend:$(Build.BuildId) ./frontend
+  displayName: 'Build Frontend Image'
+
