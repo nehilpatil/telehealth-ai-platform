@@ -25,3 +25,17 @@ steps:
     cd frontend
     npm run build
   displayName: 'Build React Frontend'
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.12'
+  displayName: 'Install Python'
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install Backend Dependencies'
+
+- script: |
+    python -c "from api.main import app; print('FastAPI import successful')"
+  displayName: 'Verify FastAPI Application'
