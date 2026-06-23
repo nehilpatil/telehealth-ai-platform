@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: telehealth-backend
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: telehealth-backend
+
+  template:
+    metadata:
+      labels:
+        app: telehealth-backend
+
+    spec:
+      containers:
+      - name: backend
+        image: image: telehealthacr12345.azurecr.io/telehealth-backend:11
+
+        ports:
+        - containerPort: 8000
