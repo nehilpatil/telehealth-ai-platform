@@ -35,14 +35,12 @@ from database.repository import (
 
 from schemas.clinician import ClinicianCreate
 from auth.dependencies import get_current_user
-from config.settings import settings
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
-    allow_origin_regex=settings.CORS_ALLOW_ORIGIN_REGEX,
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

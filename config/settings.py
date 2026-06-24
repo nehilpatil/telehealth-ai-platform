@@ -19,18 +19,4 @@ class Settings:
         "https://models.inference.ai.azure.com"
     )
 
-    CORS_ORIGINS = [
-        origin.strip()
-        for origin in os.getenv(
-            "CORS_ORIGINS",
-            "http://localhost:5173,http://127.0.0.1:5173"
-        ).split(",")
-        if origin.strip()
-    ]
-
-    CORS_ALLOW_ORIGIN_REGEX = os.getenv(
-        "CORS_ALLOW_ORIGIN_REGEX",
-        r"https?://.*"
-    )
-
 settings = Settings()

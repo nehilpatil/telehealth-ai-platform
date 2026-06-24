@@ -1,19 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: telehealth-frontend
+
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       app: telehealth-frontend
+
   template:
     metadata:
       labels:
         app: telehealth-frontend
+
     spec:
       containers:
       - name: frontend
         image: telehealthacr12345.azurecr.io/telehealth-frontend:13
+
         ports:
-        - containerPort: 5173
+        - containerPort: 80
