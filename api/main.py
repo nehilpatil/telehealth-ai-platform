@@ -38,8 +38,7 @@ from auth.dependencies import get_current_user
 
 app = FastAPI()
 
-from config import settings
-
+from config.settings import settings
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
