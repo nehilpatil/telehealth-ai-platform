@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  VITE_API_URL: "http://4.224.191.109:8000"
+
 steps:
 
 - task: UseNode@1
@@ -63,6 +66,7 @@ steps:
     dockerfile: frontend/Dockerfile
     buildContext: frontend
     containerRegistry: telehealth-acr-connection
+    arguments: --build-arg VITE_API_URL=$(VITE_API_URL)
     tags: |
       $(Build.BuildId)
 
